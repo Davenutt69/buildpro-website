@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | BuildPro</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">🏗️ BuildPro</div>
+    <ul class="nav-links">
+      <li><a href="home.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="estimates.html">Get a Quote</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="menu-toggle">&#9776;</div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero contact-hero">
+    <div class="hero-overlay">
+      <h1 class="animate__animated animate__fadeInDown">Contact Us</h1>
+      <p class="animate__animated animate__fadeInUp">We’d love to hear from you. Let’s build something together.</p>
+    </div>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="contact-container">
+    <div class="contact-info">
+      <h2>Our Office</h2>
+      <p><i class="fas fa-map-marker-alt"></i> Gachie Academy Cir, Kiambu</p>
+      <p><i class="fas fa-phone"></i> +254 746 648224</p>
+      <p><i class="fas fa-envelope"></i> probuildinc001@gmail.com</p>
+      <p><i class="fas fa-clock"></i> Mon - Fri: 9:00 AM - 6:00 PM</p>
+
+      <div class="social-icons">
+        <a href="https://facebook.com/" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h2>Send Us a Message</h2>
+
+      <!-- form POSTS into a hidden iframe so the main page doesn't redirect -->
+      <form id="contactForm" action="https://formsubmit.co/probuildinc001@gmail.com" method="POST" target="hidden_iframe">
+        <!-- Prevent spam (FormSubmit) -->
+        <input type="hidden" name="_captcha" value="false">
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="cta-button">Send Message</button>
+      </form>
+
+      <!-- Hidden iframe receives the response so the main page doesn't change -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+    </div>
+  </section>
+
+  <!-- Thank You Popup (you'll style this in your CSS) -->
+  <div id="thankYouPopup" class="thankyou-popup" style="display:none;">
+    <div class="popup-content">
+      <p>✅ Thank you — your message has been sent!</p>
+      <button id="closePopupBtn">OK</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 BuildPro. All rights reserved.</p>
+  </footer>
+
+  <!-- Script: show popup only after iframe loads AND submission was initiated -->
+  <script>
+    (function () {
+      const form = document.getElementById('contactForm');
+      const iframe = document.getElementById('hidden_iframe');
+      const popup = document.getElementById('thankYouPopup');
+      const closeBtn = document.getElementById('closePopupBtn');
+
+      // Flag to mark a submission has started
+      let submitting = false;
+
+      // When the form is submitted, set flag true
+      form.addEventListener('submit', function () {
+        submitting = true;
+      });
+
+      // When the iframe loads after a submission, show popup and reset form
+      iframe.addEventListener('load', function () {
+        if (!submitting) return; // Ignore loads that are not caused by our submit action
+        // Show popup
+        popup.style.display = 'flex';
+        // Reset form fields
+        form.reset();
+        // Reset the flag shortly after
+        setTimeout(() => { submitting = false; }, 500);
+      });
+
+      // Close popup
+      closeBtn.addEventListener('click', function () {
+        popup.style.display = 'none';
+      });
+
+      // Close when clicking outside popup-content (optional)
+      popup.addEventListener('click', function (e) {
+        if (e.target === popup) popup.style.display = 'none';
+      });
+    })();
+  </script>
+</body>
+</html>

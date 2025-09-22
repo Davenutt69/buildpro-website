@@ -1,0 +1,35 @@
+// Counter Animation
+document.addEventListener("DOMContentLoaded", function () {
+    const counters = document.querySelectorAll(".counter");
+    counters.forEach((counter) => {
+        let target = +counter.getAttribute("data-target");
+        let count = 0;
+        let increment = target / 100;
+        let updateCounter = () => {
+            if (count < target) {
+                count += increment;
+                counter.innerText = Math.floor(count);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.innerText = target;
+            }
+        };
+        updateCounter();
+    });
+});
+
+// Testimonials Slider
+let slides = document.querySelectorAll(".testimonial-slide");
+let index = 0;
+
+document.querySelector(".next-btn").addEventListener("click", () => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+});
+
+document.querySelector(".prev-btn").addEventListener("click", () => {
+    slides[index].classList.remove("active");
+    index = (index - 1 + slides.length) % slides.length;
+    slides[index].classList.add("active");
+});
